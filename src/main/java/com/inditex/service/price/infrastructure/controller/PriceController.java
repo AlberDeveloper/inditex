@@ -2,6 +2,7 @@ package com.inditex.service.price.infrastructure.controller;
 
 import com.inditex.service.price.application.service.impl.PriceServiceImpl;
 import com.inditex.service.price.domain.entity.Price;
+import com.inditex.service.price.domain.exception.PriceNotFoundException;
 import com.inditex.service.price.infrastructure.dto.PriceResponseDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -46,7 +47,7 @@ public class PriceController {
 
         // Find the price for the given parameters
         Price price = priceService.findPrice(date, productId, brandId)
-                .orElseThrow(Exception::new);
+                .orElseThrow(PriceNotFoundException::new);
 
         // Build the response DTO
         PriceResponseDto responseDto = new PriceResponseDto.Builder()
