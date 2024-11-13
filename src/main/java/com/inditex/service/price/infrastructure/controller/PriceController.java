@@ -2,7 +2,7 @@ package com.inditex.service.price.infrastructure.controller;
 
 import com.inditex.service.price.application.service.impl.PriceServiceImpl;
 import com.inditex.service.price.domain.entity.Price;
-import com.inditex.service.price.infrastructure.dto.PriceResponse;
+import com.inditex.service.price.infrastructure.dto.PriceResponseDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -39,17 +39,26 @@ public class PriceController {
      * @throws Exception if no price is available for the given parameters
      */
     @GetMapping()
-    public ResponseEntity<PriceResponse> getPrice(
+    public ResponseEntity<PriceResponseDto> getPrice(
             @RequestParam("date") LocalDateTime date,
             @RequestParam("productId") int productId,
             @RequestParam("brandId") int brandId) throws Exception {
 
+        // Find the price for the given parameters
         Price price = priceService.findPrice(date, productId, brandId)
                 .orElseThrow(Exception::new);
 
-        PriceResponse priceResponse = new PriceResponse(price.getProductId(), price.getBrandId(), price.getPriceList(),
-                price.getStartDate(), price.getEndDate(), price.getPrice());
+        // Build the response DTO
+        PriceResponseDto responseDto = new PriceResponseDto.Builder()
+                .productId(price.getProductId())
+                .brandId(price.getBrandId())
+                .priceList(price.getPriceList())
+                .startDate(price.getStartDate())
+                .endDate(price.getEndDate())
+                .price(price.getPrice())
+                .build();
 
-        return ResponseEntity.ok(priceResponse);
+        // Return the response
+        return ResponseEntity.ok(responseDto);
     }
 }
