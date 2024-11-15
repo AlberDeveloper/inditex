@@ -1,6 +1,5 @@
 package com.inditex.service.price.infrastructure.dto;
 
-import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 /**
@@ -9,6 +8,7 @@ import java.time.LocalDateTime;
  *
  * @author Alberto Pereira
  */
+
 public class PriceResponseDto {
     private final int productId;
     private final int brandId;
@@ -16,6 +16,16 @@ public class PriceResponseDto {
     private final LocalDateTime startDate;
     private final LocalDateTime endDate;
     private final float price;
+
+
+    public PriceResponseDto(int productId, int brandId, int priceList, LocalDateTime startDate, LocalDateTime endDate, float price) {
+        this.productId = productId;
+        this.brandId = brandId;
+        this.priceList = priceList;
+        this.startDate = startDate;
+        this.endDate = endDate;
+        this.price = price;
+    }
 
     private PriceResponseDto(Builder builder) {
         this.productId = builder.productId;

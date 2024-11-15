@@ -1,6 +1,7 @@
 package com.inditex.service.price.domain.entity;
 
 import jakarta.persistence.*;
+
 import java.time.LocalDateTime;
 
 /**
