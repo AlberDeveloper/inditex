@@ -21,7 +21,7 @@ public class PriceControllerTest {
     @Autowired
     private MockMvc mockMvc;
 
-    private String endpoint = "/api/prices";
+    private String endpoint = "/v1/api/prices/getPrice";
 
     @Test
     public void testGetPrice_Base() throws Exception {

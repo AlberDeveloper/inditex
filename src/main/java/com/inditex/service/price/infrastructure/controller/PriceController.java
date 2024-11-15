@@ -20,7 +20,7 @@ import java.time.LocalDateTime;
  * @author Alberto Pereira
  */
 @RestController
-@RequestMapping("/api/prices")
+@RequestMapping("/v1/api/prices")
 public class PriceController {
     private final PriceServiceImpl priceService;
 
@@ -39,7 +39,7 @@ public class PriceController {
      * @return a ResponseEntity containing the PriceResponse if found
      * @throws Exception if no price is available for the given parameters
      */
-    @GetMapping()
+    @GetMapping("/getPrice")
     public ResponseEntity<PriceResponseDto> getPrice(
             @RequestParam("date") LocalDateTime date,
             @RequestParam("productId") int productId,
